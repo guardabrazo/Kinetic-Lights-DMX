@@ -7,8 +7,8 @@ import controlP5.*;
 PeasyCam cam;
 ControlP5 controlP5;
 
-int xLights = 5;
-int yLights = 10;
+int xLights = 0;
+int yLights = 0;
 int separation = 30;
 int radius = 5;
 
@@ -29,13 +29,16 @@ void setup() {
 
   //GUI SETTINGS
   controlP5 = new ControlP5(this);
-  controlP5.addSlider("LIGHTS X", 0, 20, 5, 10, 10, 100, 20);
-  controlP5.addSlider("LIGHTS Y", 0, 20, 5, 10, 35, 100, 20);
+  controlP5.addNumberbox("LIGHTS X", 0, 10, 10, 50, 20);
+  controlP5.addNumberbox("LIGHTS Y", 0, 10, 50, 50, 20);
   controlP5.setAutoDraw(false);
 }
 
 void draw() {
   background(200);
+  
+  xLights = round(controlP5.getController("LIGHTS X").getValue());
+  yLights = round(controlP5.getController("LIGHTS Y").getValue());
 
   //PREVENT GUI CHANGES TO MOVE CAMERA
   if (controlP5.getWindow().isMouseOver()) {
